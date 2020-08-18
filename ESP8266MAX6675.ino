@@ -1,9 +1,9 @@
 /*
-  Project 	: Quest M3 Thermal Monitor
+  Project 	: MAX6675 Thermal Monitor
 
   Purpose	: This sketch uses MAX6675 and SSD1315 OLED display
-  	  	  	  to implement thermal monitor for Quest M3 coffee roaster
-  	  	  	  Also, this source code is free software and WITHOUT ANY WARRANTY, enjoy!
+  	  	  to implement thermal monitor for Quest M3 coffee roaster
+  	  	  Also, this source code is free software and WITHOUT ANY WARRANTY, enjoy!
 
   Author	: Sam Chen
   Blog 		: https://www.sam4sharing.com
@@ -32,7 +32,7 @@
 #define SO_PIN 	D6	// GPIO5
 
 float 	tempArray[10];				// store last 10 times temperature
-int		arrayIndex = 0;
+int     arrayIndex = 0;
 bool	firstTen = true;
 bool	abnormalValue = false;
 float	currentTemp, lastTemp, avgTemp;
@@ -99,8 +99,8 @@ void loop() {
 	    if ( !firstTen ) {
 	    	currentTemp = thermocouple->readCelsius();
 	    	avgTemp = averageTemp();
-	    	// ¶i¨§·Å­°·|¤j©ó10«×C
-	    	// ©Ò¥H¥u¹LÂo²§±`·Å¤É©ñ±¼·Å­°
+	    	// é€²è±†æº«é™æœƒå¤§æ–¼10åº¦C
+	    	// æ‰€ä»¥åªéæ¿¾ç•°å¸¸æº«å‡æ”¾æ‰æº«é™
 	    	if (currentTemp < (lastTemp + 10)) {
 	    		// compare with last temperature
 	    		tempArray[arrayIndex] = lastTemp = currentTemp;
