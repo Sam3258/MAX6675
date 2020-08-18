@@ -1,9 +1,8 @@
 /*
   Project 	: A MAX6675 driver for Artisan Coffee Roastor Application
 
-  Purpose	: Normally, the original USB-UART serial port is used for debugging, No more port to communicate with Artisan application.
-              This demonstration is to implement ESP32 "SECOND" serial port by Bluetooth Serial-Port-Profile (SPP),
-              That is, this project uses Bluetooth SPP to comunicate with Artisan application
+  Purpose	: This demonstration is to simulate TC4 serial protocol in order to communicate Artisan application.
+                  In this implementation, enables ESP32 "SECOND" serial port by Bluetooth Serial-Port-Profile (SPP).
              
   Author	: Sam Chen
   Blog 		: https://www.sam4sharing.com
@@ -38,7 +37,7 @@
 #define CS_PIN 	15  // D7, GPIO4
 #define SO_PIN 	13  // D6, GPIO5
 
-#define PRINT_TEAMPERATURE_EVERY_SECOND	0	
+#define PRINT_TEAMPERATURE_EVERY_SECOND		0	
 #define PRINT_ARTISAN_WHOLE_MESSAGE		0
 
 /* 
@@ -46,18 +45,18 @@ the default sample rate Artisan is 3 seconds, although the setting value can be 
 I think this value is from experimental value, so change original 10 (1000msx10=10 sec) to 8 (750msx8=6 sec)
 */
 #define TEMPERATURE_ARRAY_LENGTH		8	    // first version is 10
-#define INTERVEL 						750		// read MAX6675 every "INTERVEL" ms, first version is 1000
+#define INTERVEL 				750		// read MAX6675 every "INTERVEL" ms, first version is 1000
 
 bool 			unit_F = false;
 float 			tempArray[TEMPERATURE_ARRAY_LENGTH];	// store last times temperature
-int				arrayIndex = 0;
+int			arrayIndex = 0;
 bool			firstTen = true;
 bool			abnormalValue = false;
 float			currentTemp, lastTemp, avgTemp;
 float   		last10secTemp, deltaTemp;
-unsigned long 	previousMillis = 0;    	// store last time of temperature reading
+unsigned long 		previousMillis = 0;    	// store last time of temperature reading
 char 			printBuf[64];			// a buffer for OLED and character transfer
-IPAddress       ip;
+IPAddress       	ip;
 
 const char* ssid = "WiFi SSID";	// Replace with your WiFi SSID & Password
 const char* password = "SSID Password";
